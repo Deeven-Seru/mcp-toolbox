@@ -852,7 +852,7 @@ names, or other parts of the query.&lt;/p&gt;</description></item><item><title>C
 			&lt;tr&gt;
 					&lt;td&gt;&lt;/td&gt;
 					&lt;td&gt;&lt;code&gt;--prebuilt&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;Use one or more prebuilt tool configuration by source type. Optionally specify a toolset suffix (e.g., &lt;code&gt;&amp;lt;source&amp;gt;/&amp;lt;toolset&amp;gt;&lt;/code&gt;) to load only that toolset. See &lt;a href="https://mcp-toolbox.dev/dev/documentation/configuration/prebuilt-configs/"&gt;Prebuilt Tools Reference&lt;/a&gt; for allowed values.&lt;/td&gt;
+					&lt;td&gt;Use one or more prebuilt tool configuration by source type. Optionally specify a toolset suffix (e.g., &lt;code&gt;&amp;lt;source&amp;gt;/&amp;lt;toolset&amp;gt;&lt;/code&gt;) to load only that toolset. These prebuilt configs are intended for &amp;lsquo;build-time&amp;rsquo; use cases, where agents are helping trusted developers build things. They are not secure enough for &amp;lsquo;run time&amp;rsquo; use cases, where the agent will be talking to potentially untrusted developers. See &lt;a href="https://mcp-toolbox.dev/dev/documentation/configuration/prebuilt-configs/"&gt;Prebuilt Tools Reference&lt;/a&gt; for allowed values.&lt;/td&gt;
 					&lt;td&gt;&lt;/td&gt;
 			&lt;/tr&gt;
 			&lt;tr&gt;
@@ -938,6 +938,12 @@ names, or other parts of the query.&lt;/p&gt;</description></item><item><title>C
 					&lt;td&gt;&lt;code&gt;--poll-interval&lt;/code&gt;&lt;/td&gt;
 					&lt;td&gt;Specifies the polling frequency (seconds) for configuration file updates.&lt;/td&gt;
 					&lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;/td&gt;
+					&lt;td&gt;&lt;code&gt;--enable-draft-specs&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;Opt-in and test upcoming draft MCP specifications.&lt;/td&gt;
+					&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
 			&lt;/tr&gt;
 			&lt;tr&gt;
 					&lt;td&gt;&lt;code&gt;-v&lt;/code&gt;&lt;/td&gt;
@@ -2969,16 +2975,10 @@ your &lt;code&gt;tools.yaml&lt;/code&gt; file:&lt;/p&gt;
 project. By default, it uses the project configured on the source. You can pass
 the optional &lt;code&gt;project&lt;/code&gt; parameter to list buckets in a different project that
 the same credentials can access.&lt;/p&gt;
-&lt;p&gt;The response is a JSON object with &lt;code&gt;buckets&lt;/code&gt; (bucket metadata returned by the
-Cloud Storage API) and &lt;code&gt;nextPageToken&lt;/code&gt; (empty when there are no more pages).&lt;/p&gt;
-&lt;h2 id="compatible-sources"&gt;Compatible Sources&lt;/h2&gt;
-
-
-
-
-
-&lt;div class="compatibility-section"&gt;
- &lt;p&gt;This tool can be used with the following database sources:&lt;/p&gt;</description></item><item><title>cockroachdb-execute-sql</title><link>https://mcp-toolbox.dev/dev/integrations/cockroachdb/tools/cockroachdb-execute-sql/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/cockroachdb/tools/cockroachdb-execute-sql/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
+&lt;p&gt;You can also set &lt;code&gt;project&lt;/code&gt; or &lt;code&gt;prefix&lt;/code&gt; in the tool configuration. When set,
+that field is removed from the runtime parameter schema and the configured value
+is always used. Set &lt;code&gt;project&lt;/code&gt; to an empty string to hide the parameter while
+using the source&amp;rsquo;s configured project.&lt;/p&gt;</description></item><item><title>cockroachdb-execute-sql</title><link>https://mcp-toolbox.dev/dev/integrations/cockroachdb/tools/cockroachdb-execute-sql/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/cockroachdb/tools/cockroachdb-execute-sql/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
 &lt;p&gt;A &lt;code&gt;cockroachdb-execute-sql&lt;/code&gt; tool executes ad-hoc SQL statements against a CockroachDB database. This tool is designed for interactive workflows where the SQL query is provided dynamically at runtime, making it ideal for developer assistance and exploratory data analysis.&lt;/p&gt;
 &lt;p&gt;The tool takes a single &lt;code&gt;sql&lt;/code&gt; parameter containing the SQL statement to execute and returns the query results.&lt;/p&gt;
 &lt;blockquote&gt;
@@ -3465,7 +3465,46 @@ To orchestrate this workflow, you must:&lt;/p&gt;
 
 
 &lt;div class="compatibility-section"&gt;
- &lt;p&gt;This tool can be used with the following database sources:&lt;/p&gt;</description></item><item><title>dataplex-get-data-insights</title><link>https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/tools/knowledge-catalog-get-data-insights/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/tools/knowledge-catalog-get-data-insights/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
+ &lt;p&gt;This tool can be used with the following database sources:&lt;/p&gt;</description></item><item><title>dataplex-get-data-asset</title><link>https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/tools/knowledge-catalog-get-data-asset/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/tools/knowledge-catalog-get-data-asset/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
+&lt;p&gt;A &lt;code&gt;dataplex-get-data-asset&lt;/code&gt; tool retrieves detailed metadata for a specific Data Asset in Knowledge Catalog (formerly known as Dataplex).&lt;/p&gt;
+&lt;p&gt;View the &lt;a href="https://docs.cloud.google.com/dataplex/docs/data-products-overview"&gt;Data Products guide&lt;/a&gt; for more information.&lt;/p&gt;
+&lt;h2 id="compatible-sources"&gt;Compatible Sources&lt;/h2&gt;
+
+
+
+
+
+&lt;div class="compatibility-section"&gt;
+ &lt;p&gt;This tool can be used with the following database sources:&lt;/p&gt;
+
+ &lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;Source Name&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ 
+ 
+ &lt;tr&gt;
+ &lt;td&gt;&lt;a href="https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/source/"&gt;Knowledge Catalog (formerly known as Dataplex) Source&lt;/a&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ 
+
+ 
+
+ 
+ 
+ &lt;/tbody&gt;
+ &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;h2 id="requirements"&gt;Requirements&lt;/h2&gt;
+&lt;h3 id="iam-permissions"&gt;IAM Permissions&lt;/h3&gt;
+&lt;p&gt;Knowledge Catalog uses &lt;a href="https://cloud.google.com/dataplex/docs/iam-and-access-control"&gt;Identity and Access Management (IAM)&lt;/a&gt; to control
+user and group access to Knowledge Catalog resources. Toolbox will use your
+&lt;a href="https://cloud.google.com/docs/authentication#adc"&gt;Application Default Credentials (ADC)&lt;/a&gt; to authorize and authenticate when
+interacting with &lt;a href="https://cloud.google.com/dataplex"&gt;Knowledge Catalog&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>dataplex-get-data-insights</title><link>https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/tools/knowledge-catalog-get-data-insights/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/tools/knowledge-catalog-get-data-insights/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
 &lt;p&gt;A &lt;code&gt;dataplex-get-data-insights&lt;/code&gt; tool retrieves the final results of a completed Data Insights scan.&lt;/p&gt;
 &lt;p&gt;WARNING: You must verify that the execution run has succeeded (via &lt;code&gt;dataplex-get-run-status&lt;/code&gt;) before calling this tool, otherwise the results will be empty.
 CRITICAL: Access the results only via the nested public GA fields &lt;code&gt;dataDocumentationResult.datasetResult&lt;/code&gt; (for datasets) or &lt;code&gt;dataDocumentationResult.tableResult&lt;/code&gt; (for tables). The top-level fields (like &lt;code&gt;dataDocumentationResult.queries&lt;/code&gt;) are restricted and will be empty.&lt;/p&gt;
@@ -3476,7 +3515,46 @@ CRITICAL: Access the results only via the nested public GA fields &lt;code&gt;da
 
 
 &lt;div class="compatibility-section"&gt;
- &lt;p&gt;This tool can be used with the following database sources:&lt;/p&gt;</description></item><item><title>dataplex-get-data-profile</title><link>https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/tools/knowledge-catalog-get-data-profile/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/tools/knowledge-catalog-get-data-profile/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
+ &lt;p&gt;This tool can be used with the following database sources:&lt;/p&gt;</description></item><item><title>dataplex-get-data-product</title><link>https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/tools/knowledge-catalog-get-data-product/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/tools/knowledge-catalog-get-data-product/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
+&lt;p&gt;A &lt;code&gt;dataplex-get-data-product&lt;/code&gt; tool retrieves detailed metadata for a specific Data Product in Knowledge Catalog (formerly known as Dataplex).&lt;/p&gt;
+&lt;p&gt;View the &lt;a href="https://docs.cloud.google.com/dataplex/docs/data-products-overview"&gt;Data Products guide&lt;/a&gt; for more information.&lt;/p&gt;
+&lt;h2 id="compatible-sources"&gt;Compatible Sources&lt;/h2&gt;
+
+
+
+
+
+&lt;div class="compatibility-section"&gt;
+ &lt;p&gt;This tool can be used with the following database sources:&lt;/p&gt;
+
+ &lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;Source Name&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ 
+ 
+ &lt;tr&gt;
+ &lt;td&gt;&lt;a href="https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/source/"&gt;Knowledge Catalog (formerly known as Dataplex) Source&lt;/a&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ 
+
+ 
+
+ 
+ 
+ &lt;/tbody&gt;
+ &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;h2 id="requirements"&gt;Requirements&lt;/h2&gt;
+&lt;h3 id="iam-permissions"&gt;IAM Permissions&lt;/h3&gt;
+&lt;p&gt;Knowledge Catalog uses &lt;a href="https://cloud.google.com/dataplex/docs/iam-and-access-control"&gt;Identity and Access Management (IAM)&lt;/a&gt; to control
+user and group access to Knowledge Catalog resources. Toolbox will use your
+&lt;a href="https://cloud.google.com/docs/authentication#adc"&gt;Application Default Credentials (ADC)&lt;/a&gt; to authorize and authenticate when
+interacting with &lt;a href="https://cloud.google.com/dataplex"&gt;Knowledge Catalog&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>dataplex-get-data-profile</title><link>https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/tools/knowledge-catalog-get-data-profile/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/tools/knowledge-catalog-get-data-profile/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
 &lt;p&gt;A &lt;code&gt;dataplex-get-data-profile&lt;/code&gt; tool retrieves the results of a completed Data Profile scan.&lt;/p&gt;
 &lt;p&gt;WARNING: You must verify the execution run has succeeded (via &lt;code&gt;dataplex-get-run-status&lt;/code&gt;) before calling this tool, otherwise the results will be empty.
 CRITICAL: Access the results via the nested public fields &lt;code&gt;dataProfileResult.profile.fields&lt;/code&gt; inside the returned DataScan.&lt;/p&gt;
@@ -3581,7 +3659,85 @@ WARNING: This only tracks the creation of the scan template, NOT the actual back
 
 
 &lt;div class="compatibility-section"&gt;
- &lt;p&gt;This tool can be used with the following database sources:&lt;/p&gt;</description></item><item><title>dataplex-lookup-context</title><link>https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/tools/knowledge-catalog-lookup-context/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/tools/knowledge-catalog-lookup-context/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
+ &lt;p&gt;This tool can be used with the following database sources:&lt;/p&gt;</description></item><item><title>dataplex-list-data-assets</title><link>https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/tools/knowledge-catalog-list-data-assets/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/tools/knowledge-catalog-list-data-assets/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
+&lt;p&gt;A &lt;code&gt;dataplex-list-data-assets&lt;/code&gt; tool retrieves a list of Data Assets associated with a specific Data Product in Knowledge Catalog (formerly known as Dataplex).&lt;/p&gt;
+&lt;p&gt;View the &lt;a href="https://docs.cloud.google.com/dataplex/docs/data-products-overview"&gt;Data Products guide&lt;/a&gt; for more information.&lt;/p&gt;
+&lt;h2 id="compatible-sources"&gt;Compatible Sources&lt;/h2&gt;
+
+
+
+
+
+&lt;div class="compatibility-section"&gt;
+ &lt;p&gt;This tool can be used with the following database sources:&lt;/p&gt;
+
+ &lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;Source Name&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ 
+ 
+ &lt;tr&gt;
+ &lt;td&gt;&lt;a href="https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/source/"&gt;Knowledge Catalog (formerly known as Dataplex) Source&lt;/a&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ 
+
+ 
+
+ 
+ 
+ &lt;/tbody&gt;
+ &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;h2 id="requirements"&gt;Requirements&lt;/h2&gt;
+&lt;h3 id="iam-permissions"&gt;IAM Permissions&lt;/h3&gt;
+&lt;p&gt;Knowledge Catalog uses &lt;a href="https://cloud.google.com/dataplex/docs/iam-and-access-control"&gt;Identity and Access Management (IAM)&lt;/a&gt; to control
+user and group access to Knowledge Catalog resources. Toolbox will use your
+&lt;a href="https://cloud.google.com/docs/authentication#adc"&gt;Application Default Credentials (ADC)&lt;/a&gt; to authorize and authenticate when
+interacting with &lt;a href="https://cloud.google.com/dataplex"&gt;Knowledge Catalog&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>dataplex-list-data-products</title><link>https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/tools/knowledge-catalog-list-data-products/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/tools/knowledge-catalog-list-data-products/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
+&lt;p&gt;A &lt;code&gt;dataplex-list-data-products&lt;/code&gt; tool lists all Data Products in Knowledge Catalog (formerly known as Dataplex) across all locations (globally).&lt;/p&gt;
+&lt;p&gt;View the &lt;a href="https://docs.cloud.google.com/dataplex/docs/data-products-overview"&gt;Data Products guide&lt;/a&gt; for more information.&lt;/p&gt;
+&lt;h2 id="compatible-sources"&gt;Compatible Sources&lt;/h2&gt;
+
+
+
+
+
+&lt;div class="compatibility-section"&gt;
+ &lt;p&gt;This tool can be used with the following database sources:&lt;/p&gt;
+
+ &lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;Source Name&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ 
+ 
+ &lt;tr&gt;
+ &lt;td&gt;&lt;a href="https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/source/"&gt;Knowledge Catalog (formerly known as Dataplex) Source&lt;/a&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ 
+
+ 
+
+ 
+ 
+ &lt;/tbody&gt;
+ &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;h2 id="requirements"&gt;Requirements&lt;/h2&gt;
+&lt;h3 id="iam-permissions"&gt;IAM Permissions&lt;/h3&gt;
+&lt;p&gt;Knowledge Catalog uses &lt;a href="https://cloud.google.com/dataplex/docs/iam-and-access-control"&gt;Identity and Access Management (IAM)&lt;/a&gt; to control
+user and group access to Knowledge Catalog resources. Toolbox will use your
+&lt;a href="https://cloud.google.com/docs/authentication#adc"&gt;Application Default Credentials (ADC)&lt;/a&gt; to authorize and authenticate when
+interacting with &lt;a href="https://cloud.google.com/dataplex"&gt;Knowledge Catalog&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>dataplex-lookup-context</title><link>https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/tools/knowledge-catalog-lookup-context/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/tools/knowledge-catalog-lookup-context/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
 &lt;p&gt;A &lt;code&gt;dataplex-lookup-context&lt;/code&gt; tool provides rich metadata of one or more data assets along with their relationships.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;dataplex-lookup-context&lt;/code&gt; takes a required &lt;code&gt;resources&lt;/code&gt; parameter which is a list of up to 10 resource names for which metadata is needed in the following form: &lt;code&gt;projects/{project}/locations/{location}/entryGroups/{group}/entries/{entry}&lt;/code&gt;. All resources must belong to the same Google Cloud location.&lt;/p&gt;
 &lt;h2 id="compatible-sources"&gt;Compatible Sources&lt;/h2&gt;
@@ -7576,13 +7732,14 @@ Looker personal folder.&lt;/p&gt;
  &lt;p&gt;This tool can be used with the following database sources:&lt;/p&gt;</description></item><item><title>looker-query</title><link>https://mcp-toolbox.dev/dev/integrations/looker/tools/looker-query/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/looker/tools/looker-query/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
 &lt;p&gt;The &lt;code&gt;looker-query&lt;/code&gt; tool runs a query using the Looker
 semantic model.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;looker-query&lt;/code&gt; takes nine parameters:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;looker-query&lt;/code&gt; takes ten parameters:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;the &lt;code&gt;model&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;the &lt;code&gt;explore&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;the &lt;code&gt;fields&lt;/code&gt; list&lt;/li&gt;
 &lt;li&gt;an optional set of &lt;code&gt;filters&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;an optional &lt;code&gt;filter_expression&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;an optional &lt;code&gt;dynamic_fields&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;an optional set of &lt;code&gt;pivots&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;an optional set of &lt;code&gt;sorts&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;an optional &lt;code&gt;limit&lt;/code&gt;&lt;/li&gt;
@@ -7593,13 +7750,14 @@ System Activity. In the History explore, use the field API Client Name
 to find MCP Toolbox queries.&lt;/p&gt;</description></item><item><title>looker-query-sql</title><link>https://mcp-toolbox.dev/dev/integrations/looker/tools/looker-query-sql/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/looker/tools/looker-query-sql/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
 &lt;p&gt;The &lt;code&gt;looker-query-sql&lt;/code&gt; generates a sql query using the Looker
 semantic model.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;looker-query-sql&lt;/code&gt; takes nine parameters:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;looker-query-sql&lt;/code&gt; takes ten parameters:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;the &lt;code&gt;model&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;the &lt;code&gt;explore&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;the &lt;code&gt;fields&lt;/code&gt; list&lt;/li&gt;
 &lt;li&gt;an optional set of &lt;code&gt;filters&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;an optional &lt;code&gt;filter_expression&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;an optional &lt;code&gt;dynamic_fields&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;an optional set of &lt;code&gt;pivots&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;an optional set of &lt;code&gt;sorts&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;an optional &lt;code&gt;limit&lt;/code&gt;&lt;/li&gt;
@@ -7610,13 +7768,14 @@ System Activity. In the History explore, use the field API Client Name
 to find MCP Toolbox queries.&lt;/p&gt;</description></item><item><title>looker-query-url</title><link>https://mcp-toolbox.dev/dev/integrations/looker/tools/looker-query-url/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/looker/tools/looker-query-url/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
 &lt;p&gt;The &lt;code&gt;looker-query-url&lt;/code&gt; generates a url link to an explore in
 Looker so the query can be investigated further.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;looker-query-url&lt;/code&gt; takes ten parameters:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;looker-query-url&lt;/code&gt; takes eleven parameters:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;the &lt;code&gt;model&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;the &lt;code&gt;explore&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;the &lt;code&gt;fields&lt;/code&gt; list&lt;/li&gt;
 &lt;li&gt;an optional set of &lt;code&gt;filters&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;an optional &lt;code&gt;filter_expression&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;an optional &lt;code&gt;dynamic_fields&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;an optional set of &lt;code&gt;pivots&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;an optional set of &lt;code&gt;sorts&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;an optional &lt;code&gt;limit&lt;/code&gt;&lt;/li&gt;
@@ -7630,515 +7789,7 @@ Looker so the query can be investigated further.&lt;/p&gt;
 
 
 &lt;div class="compatibility-section"&gt;
- &lt;p&gt;This tool can be used with the following database sources:&lt;/p&gt;
-
- &lt;table&gt;
- &lt;thead&gt;
- &lt;tr&gt;
- &lt;th&gt;Source Name&lt;/th&gt;
- &lt;/tr&gt;
- &lt;/thead&gt;
- &lt;tbody&gt;
- 
- 
- &lt;tr&gt;
- &lt;td&gt;&lt;a href="https://mcp-toolbox.dev/dev/integrations/looker/source/"&gt;Looker Source&lt;/a&gt;&lt;/td&gt;
- &lt;/tr&gt;
- 
-
- 
-
- 
- 
- &lt;/tbody&gt;
- &lt;/table&gt;
-&lt;/div&gt;
-
-&lt;h2 id="example"&gt;Example&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;kind&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;tool&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;query_url&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;looker-query-url&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;source&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;looker-source&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;description&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; This tool generates a shareable URL for a Looker query, allowing users to
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; explore the query further within the Looker UI. It returns the generated URL,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; along with the `query_id` and `slug`.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; Parameters:
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; All query parameters (e.g., `model_name`, `explore_name`, `fields`, `pivots`,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; `filters`, `filter_expression`, `sorts`, `limit`, `query_timezone`) are the same as the `query` tool.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; Additionally, it accepts an optional `vis_config` parameter:
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; - vis_config (optional): A JSON object that controls the default visualization
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; settings for the generated query.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; vis_config Details:
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; The `vis_config` object supports a wide range of properties for various chart types.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; Here are some notes on making visualizations.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; ### Cartesian Charts (Area, Bar, Column, Line, Scatter)
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; These chart types share a large number of configuration options.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; **General**
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `type`: The type of visualization (`looker_area`, `looker_bar`, `looker_column`, `looker_line`, `looker_scatter`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `series_types`: Override the chart type for individual series.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `show_view_names`: Display view names in labels and tooltips (`true`/`false`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `series_labels`: Provide custom names for series.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; **Styling &amp;amp; Colors**
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `colors`: An array of color values to be used for the chart series.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `series_colors`: A mapping of series names to specific color values.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `color_application`: Advanced controls for color palette application (collection, palette, reverse, etc.).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `font_size`: Font size for labels (e.g., &amp;#39;12px&amp;#39;).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; **Legend**
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `hide_legend`: Show or hide the chart legend (`true`/`false`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `legend_position`: Placement of the legend (`&amp;#39;center&amp;#39;`, `&amp;#39;left&amp;#39;`, `&amp;#39;right&amp;#39;`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; **Axes**
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `swap_axes`: Swap the X and Y axes (`true`/`false`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `x_axis_scale`: Scale of the x-axis (`&amp;#39;auto&amp;#39;`, `&amp;#39;ordinal&amp;#39;`, `&amp;#39;linear&amp;#39;`, `&amp;#39;time&amp;#39;`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `x_axis_reversed`, `y_axis_reversed`: Reverse the direction of an axis (`true`/`false`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `x_axis_gridlines`, `y_axis_gridlines`: Display gridlines for an axis (`true`/`false`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `show_x_axis_label`, `show_y_axis_label`: Show or hide the axis title (`true`/`false`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `show_x_axis_ticks`, `show_y_axis_ticks`: Show or hide axis tick marks (`true`/`false`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `x_axis_label`, `y_axis_label`: Set a custom title for an axis.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `x_axis_datetime_label`: A format string for datetime labels on the x-axis (e.g., `&amp;#39;%Y-%m&amp;#39;`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `x_padding_left`, `x_padding_right`: Adjust padding on the ends of the x-axis.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `x_axis_label_rotation`, `x_axis_label_rotation_bar`: Set rotation for x-axis labels.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `x_axis_zoom`, `y_axis_zoom`: Enable zooming on an axis (`true`/`false`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `y_axes`: An array of configuration objects for multiple y-axes.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; **Data &amp;amp; Series**
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `stacking`: How to stack series (`&amp;#39;&amp;#39;` for none, `&amp;#39;normal&amp;#39;`, `&amp;#39;percent&amp;#39;`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `ordering`: Order of series in a stack (`&amp;#39;none&amp;#39;`, etc.).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `limit_displayed_rows`: Enable or disable limiting the number of rows displayed (`true`/`false`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `limit_displayed_rows_values`: Configuration for the row limit (e.g., `{ &amp;#34;first_last&amp;#34;: &amp;#34;first&amp;#34;, &amp;#34;show_hide&amp;#34;: &amp;#34;show&amp;#34;, &amp;#34;num_rows&amp;#34;: 10 }`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `discontinuous_nulls`: How to render null values in line charts (`true`/`false`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `point_style`: Style for points on line and area charts (`&amp;#39;none&amp;#39;`, `&amp;#39;circle&amp;#39;`, `&amp;#39;circle_outline&amp;#39;`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `series_point_styles`: Override point styles for individual series.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `interpolation`: Line interpolation style (`&amp;#39;linear&amp;#39;`, `&amp;#39;monotone&amp;#39;`, `&amp;#39;step&amp;#39;`, etc.).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `show_value_labels`: Display values on data points (`true`/`false`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `label_value_format`: A format string for value labels.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `show_totals_labels`: Display total labels on stacked charts (`true`/`false`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `totals_color`: Color for total labels.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `show_silhouette`: Display a &amp;#34;silhouette&amp;#34; of hidden series in stacked charts (`true`/`false`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `hidden_series`: An array of series names to hide from the visualization.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; **Scatter/Bubble Specific**
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `size_by_field`: The field used to determine the size of bubbles.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `color_by_field`: The field used to determine the color of bubbles.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `plot_size_by_field`: Whether to display the size-by field in the legend.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `cluster_points`: Group nearby points into clusters (`true`/`false`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `quadrants_enabled`: Display quadrants on the chart (`true`/`false`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `quadrant_properties`: Configuration for quadrant labels and colors.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `custom_quadrant_value_x`, `custom_quadrant_value_y`: Set quadrant boundaries as a percentage.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `custom_quadrant_point_x`, `custom_quadrant_point_y`: Set quadrant boundaries to a specific value.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; **Miscellaneous**
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `reference_lines`: Configuration for displaying reference lines.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `trend_lines`: Configuration for displaying trend lines.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `trellis`: Configuration for creating trellis (small multiple) charts.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `crossfilterEnabled`, `crossfilters`: Configuration for cross-filtering interactions.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; ### Boxplot
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * Inherits most of the Cartesian chart options.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `type`: Must be `looker_boxplot`.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; ### Funnel
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `type`: Must be `looker_funnel`.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `orientation`: How data is read (`&amp;#39;automatic&amp;#39;`, `&amp;#39;dataInRows&amp;#39;`, `&amp;#39;dataInColumns&amp;#39;`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `percentType`: How percentages are calculated (`&amp;#39;percentOfMaxValue&amp;#39;`, `&amp;#39;percentOfPriorRow&amp;#39;`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `labelPosition`, `valuePosition`, `percentPosition`: Placement of labels (`&amp;#39;left&amp;#39;`, `&amp;#39;right&amp;#39;`, `&amp;#39;inline&amp;#39;`, `&amp;#39;hidden&amp;#39;`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `labelColor`, `labelColorEnabled`: Set a custom color for labels.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `labelOverlap`: Allow labels to overlap (`true`/`false`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `barColors`: An array of colors for the funnel steps.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `color_application`: Advanced color palette controls.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `crossfilterEnabled`, `crossfilters`: Configuration for cross-filtering.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; ### Pie / Donut
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `type`: Must be `looker_pie`.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `value_labels`: Where to display values (`&amp;#39;legend&amp;#39;`, `&amp;#39;labels&amp;#39;`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `label_type`: The format of data labels (`&amp;#39;labPer&amp;#39;`, `&amp;#39;labVal&amp;#39;`, `&amp;#39;lab&amp;#39;`, `&amp;#39;val&amp;#39;`, `&amp;#39;per&amp;#39;`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `start_angle`, `end_angle`: The start and end angles of the pie chart.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `inner_radius`: The inner radius, used to create a donut chart.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `series_colors`, `series_labels`: Override colors and labels for specific slices.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `color_application`: Advanced color palette controls.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `crossfilterEnabled`, `crossfilters`: Configuration for cross-filtering.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `advanced_vis_config`: A string containing JSON for advanced Highcharts configuration.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; ### Waterfall
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * Inherits most of the Cartesian chart options.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `type`: Must be `looker_waterfall`.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `up_color`: Color for positive (increasing) values.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `down_color`: Color for negative (decreasing) values.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `total_color`: Color for the total bar.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; ### Word Cloud
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `type`: Must be `looker_wordcloud`.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `rotation`: Enable random word rotation (`true`/`false`).
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `colors`: An array of colors for the words.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `color_application`: Advanced color palette controls.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; * `crossfilterEnabled`, `crossfilters`: Configuration for cross-filtering.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; These are some sample vis_config settings.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; A bar chart -
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; {{
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;defaults_version&amp;#34;: 1,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;label_density&amp;#34;: 25,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;legend_position&amp;#34;: &amp;#34;center&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;limit_displayed_rows&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;ordering&amp;#34;: &amp;#34;none&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;plot_size_by_field&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;point_style&amp;#34;: &amp;#34;none&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_null_labels&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_silhouette&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_totals_labels&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_value_labels&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_view_names&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_x_axis_label&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_x_axis_ticks&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_y_axis_labels&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_y_axis_ticks&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;stacking&amp;#34;: &amp;#34;normal&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;totals_color&amp;#34;: &amp;#34;#808080&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;trellis&amp;#34;: &amp;#34;&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;type&amp;#34;: &amp;#34;looker_bar&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;x_axis_gridlines&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;x_axis_reversed&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;x_axis_scale&amp;#34;: &amp;#34;auto&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;x_axis_zoom&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_combined&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_gridlines&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_reversed&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_scale_mode&amp;#34;: &amp;#34;linear&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_tick_density&amp;#34;: &amp;#34;default&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_tick_density_custom&amp;#34;: 5,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_zoom&amp;#34;: true
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; }}
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; A column chart with an option advanced_vis_config -
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; {{
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;advanced_vis_config&amp;#34;: &amp;#34;{ chart: { type: &amp;#39;pie&amp;#39;, spacingBottom: 50, spacingLeft: 50, spacingRight: 50, spacingTop: 50, }, legend: { enabled: false, }, plotOptions: { pie: { dataLabels: { enabled: true, format: &amp;#39;\u003cb\u003e{key}\u003c/b\u003e\u003cspan style=\&amp;#34;font-weight: normal\&amp;#34;\u003e - {percentage:.2f}%\u003c/span\u003e&amp;#39;, }, showInLegend: false, }, }, series: [], }&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;colors&amp;#34;: [
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;grey&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; ],
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;defaults_version&amp;#34;: 1,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;hidden_fields&amp;#34;: [],
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;label_density&amp;#34;: 25,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;legend_position&amp;#34;: &amp;#34;center&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;limit_displayed_rows&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;note_display&amp;#34;: &amp;#34;below&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;note_state&amp;#34;: &amp;#34;collapsed&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;note_text&amp;#34;: &amp;#34;Unsold inventory only&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;ordering&amp;#34;: &amp;#34;none&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;plot_size_by_field&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;point_style&amp;#34;: &amp;#34;none&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;series_colors&amp;#34;: {},
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_null_labels&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_silhouette&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_totals_labels&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_value_labels&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_view_names&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_x_axis_label&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_x_axis_ticks&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_y_axis_labels&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_y_axis_ticks&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;stacking&amp;#34;: &amp;#34;normal&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;totals_color&amp;#34;: &amp;#34;#808080&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;trellis&amp;#34;: &amp;#34;&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;type&amp;#34;: &amp;#34;looker_column&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;x_axis_gridlines&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;x_axis_reversed&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;x_axis_scale&amp;#34;: &amp;#34;auto&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;x_axis_zoom&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axes&amp;#34;: [],
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_combined&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_gridlines&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_reversed&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_scale_mode&amp;#34;: &amp;#34;linear&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_tick_density&amp;#34;: &amp;#34;default&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_tick_density_custom&amp;#34;: 5,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_zoom&amp;#34;: true
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; }}
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; A line chart -
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; {{
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;defaults_version&amp;#34;: 1,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;hidden_pivots&amp;#34;: {},
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;hidden_series&amp;#34;: [],
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;interpolation&amp;#34;: &amp;#34;linear&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;label_density&amp;#34;: 25,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;legend_position&amp;#34;: &amp;#34;center&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;limit_displayed_rows&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;plot_size_by_field&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;point_style&amp;#34;: &amp;#34;none&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;series_types&amp;#34;: {},
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_null_points&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_value_labels&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_view_names&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_x_axis_label&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_x_axis_ticks&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_y_axis_labels&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_y_axis_ticks&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;stacking&amp;#34;: &amp;#34;&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;trellis&amp;#34;: &amp;#34;&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;type&amp;#34;: &amp;#34;looker_line&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;x_axis_gridlines&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;x_axis_reversed&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;x_axis_scale&amp;#34;: &amp;#34;auto&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_combined&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_gridlines&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_reversed&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_scale_mode&amp;#34;: &amp;#34;linear&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_tick_density&amp;#34;: &amp;#34;default&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_tick_density_custom&amp;#34;: 5
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; }}
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; An area chart -
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; {{
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;defaults_version&amp;#34;: 1,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;interpolation&amp;#34;: &amp;#34;linear&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;label_density&amp;#34;: 25,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;legend_position&amp;#34;: &amp;#34;center&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;limit_displayed_rows&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;plot_size_by_field&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;point_style&amp;#34;: &amp;#34;none&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;series_types&amp;#34;: {},
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_null_points&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_silhouette&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_totals_labels&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_value_labels&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_view_names&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_x_axis_label&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_x_axis_ticks&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_y_axis_labels&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_y_axis_ticks&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;stacking&amp;#34;: &amp;#34;normal&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;totals_color&amp;#34;: &amp;#34;#808080&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;trellis&amp;#34;: &amp;#34;&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;type&amp;#34;: &amp;#34;looker_area&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;x_axis_gridlines&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;x_axis_reversed&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;x_axis_scale&amp;#34;: &amp;#34;auto&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;x_axis_zoom&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_combined&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_gridlines&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_reversed&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_scale_mode&amp;#34;: &amp;#34;linear&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_tick_density&amp;#34;: &amp;#34;default&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_tick_density_custom&amp;#34;: 5,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_zoom&amp;#34;: true
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; }}
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; A scatter plot -
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; {{
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;cluster_points&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;custom_quadrant_point_x&amp;#34;: 5,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;custom_quadrant_point_y&amp;#34;: 5,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;custom_value_label_column&amp;#34;: &amp;#34;&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;custom_x_column&amp;#34;: &amp;#34;&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;custom_y_column&amp;#34;: &amp;#34;&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;defaults_version&amp;#34;: 1,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;hidden_fields&amp;#34;: [],
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;hidden_pivots&amp;#34;: {},
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;hidden_points_if_no&amp;#34;: [],
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;hidden_series&amp;#34;: [],
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;interpolation&amp;#34;: &amp;#34;linear&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;label_density&amp;#34;: 25,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;legend_position&amp;#34;: &amp;#34;center&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;limit_displayed_rows&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;limit_displayed_rows_values&amp;#34;: {
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;first_last&amp;#34;: &amp;#34;first&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;num_rows&amp;#34;: 0,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_hide&amp;#34;: &amp;#34;hide&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; },
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;plot_size_by_field&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;point_style&amp;#34;: &amp;#34;circle&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;quadrant_properties&amp;#34;: {
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;0&amp;#34;: {
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;color&amp;#34;: &amp;#34;&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;label&amp;#34;: &amp;#34;Quadrant 1&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; },
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;1&amp;#34;: {
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;color&amp;#34;: &amp;#34;&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;label&amp;#34;: &amp;#34;Quadrant 2&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; },
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;2&amp;#34;: {
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;color&amp;#34;: &amp;#34;&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;label&amp;#34;: &amp;#34;Quadrant 3&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; },
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;3&amp;#34;: {
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;color&amp;#34;: &amp;#34;&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;label&amp;#34;: &amp;#34;Quadrant 4&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; },
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;quadrants_enabled&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;series_labels&amp;#34;: {},
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;series_types&amp;#34;: {},
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_null_points&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_value_labels&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_view_names&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_x_axis_label&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_x_axis_ticks&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_y_axis_labels&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_y_axis_ticks&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;size_by_field&amp;#34;: &amp;#34;roi&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;stacking&amp;#34;: &amp;#34;normal&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;swap_axes&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;trellis&amp;#34;: &amp;#34;&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;type&amp;#34;: &amp;#34;looker_scatter&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;x_axis_gridlines&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;x_axis_reversed&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;x_axis_scale&amp;#34;: &amp;#34;auto&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;x_axis_zoom&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axes&amp;#34;: [
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;label&amp;#34;: &amp;#34;&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;orientation&amp;#34;: &amp;#34;bottom&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;series&amp;#34;: [
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;axisId&amp;#34;: &amp;#34;Channel_0 - average_of_roi_first&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;id&amp;#34;: &amp;#34;Channel_0 - average_of_roi_first&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;name&amp;#34;: &amp;#34;Channel_0&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; },
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;axisId&amp;#34;: &amp;#34;Channel_1 - average_of_roi_first&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;id&amp;#34;: &amp;#34;Channel_1 - average_of_roi_first&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;name&amp;#34;: &amp;#34;Channel_1&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; },
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;axisId&amp;#34;: &amp;#34;Channel_2 - average_of_roi_first&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;id&amp;#34;: &amp;#34;Channel_2 - average_of_roi_first&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;name&amp;#34;: &amp;#34;Channel_2&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; },
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;axisId&amp;#34;: &amp;#34;Channel_3 - average_of_roi_first&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;id&amp;#34;: &amp;#34;Channel_3 - average_of_roi_first&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;name&amp;#34;: &amp;#34;Channel_3&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; },
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;axisId&amp;#34;: &amp;#34;Channel_4 - average_of_roi_first&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;id&amp;#34;: &amp;#34;Channel_4 - average_of_roi_first&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;name&amp;#34;: &amp;#34;Channel_4&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; ],
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;showLabels&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;showValues&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;tickDensity&amp;#34;: &amp;#34;custom&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;tickDensityCustom&amp;#34;: 100,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;type&amp;#34;: &amp;#34;linear&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;unpinAxis&amp;#34;: false
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; ],
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_combined&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_gridlines&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_reversed&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_scale_mode&amp;#34;: &amp;#34;linear&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_tick_density&amp;#34;: &amp;#34;default&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_tick_density_custom&amp;#34;: 5,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_zoom&amp;#34;: true
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; }}
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; A single record visualization -
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; {{
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;defaults_version&amp;#34;: 1,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_view_names&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;type&amp;#34;: &amp;#34;looker_single_record&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; }}
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; A single value visualization -
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; {{
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;comparison_reverse_colors&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;comparison_type&amp;#34;: &amp;#34;value&amp;#34;, &amp;#34;conditional_formatting_include_nulls&amp;#34;: false, &amp;#34;conditional_formatting_include_totals&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;custom_color&amp;#34;: &amp;#34;#1A73E8&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;custom_color_enabled&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;defaults_version&amp;#34;: 1,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;enable_conditional_formatting&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;series_types&amp;#34;: {},
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_comparison&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_comparison_label&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_single_value_title&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;single_value_title&amp;#34;: &amp;#34;Total Clicks&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;type&amp;#34;: &amp;#34;single_value&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; }}
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; A Pie chart -
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; {{
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;defaults_version&amp;#34;: 1,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;label_density&amp;#34;: 25,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;label_type&amp;#34;: &amp;#34;labPer&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;legend_position&amp;#34;: &amp;#34;center&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;limit_displayed_rows&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;ordering&amp;#34;: &amp;#34;none&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;plot_size_by_field&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;point_style&amp;#34;: &amp;#34;none&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;series_types&amp;#34;: {},
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_null_labels&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_silhouette&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_totals_labels&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_value_labels&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_view_names&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_x_axis_label&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_x_axis_ticks&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_y_axis_labels&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;show_y_axis_ticks&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;stacking&amp;#34;: &amp;#34;&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;totals_color&amp;#34;: &amp;#34;#808080&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;trellis&amp;#34;: &amp;#34;&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;type&amp;#34;: &amp;#34;looker_pie&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;value_labels&amp;#34;: &amp;#34;legend&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;x_axis_gridlines&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;x_axis_reversed&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;x_axis_scale&amp;#34;: &amp;#34;auto&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_combined&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_gridlines&amp;#34;: true,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_reversed&amp;#34;: false,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_scale_mode&amp;#34;: &amp;#34;linear&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_tick_density&amp;#34;: &amp;#34;default&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; &amp;#34;y_axis_tick_density_custom&amp;#34;: 5
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; }}
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; The result is a JSON object with the id, slug, the url, and
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; the long_url.&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="reference"&gt;Reference&lt;/h2&gt;
-&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;&lt;strong&gt;field&lt;/strong&gt;&lt;/th&gt;
-					&lt;th style="text-align: center"&gt;&lt;strong&gt;type&lt;/strong&gt;&lt;/th&gt;
-					&lt;th style="text-align: center"&gt;&lt;strong&gt;required&lt;/strong&gt;&lt;/th&gt;
-					&lt;th&gt;&lt;strong&gt;description&lt;/strong&gt;&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;type&lt;/td&gt;
-					&lt;td style="text-align: center"&gt;string&lt;/td&gt;
-					&lt;td style="text-align: center"&gt;true&lt;/td&gt;
-					&lt;td&gt;Must be &amp;ldquo;looker-query-url&amp;rdquo;&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;source&lt;/td&gt;
-					&lt;td style="text-align: center"&gt;string&lt;/td&gt;
-					&lt;td style="text-align: center"&gt;true&lt;/td&gt;
-					&lt;td&gt;Name of the source the SQL should execute on.&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;description&lt;/td&gt;
-					&lt;td style="text-align: center"&gt;string&lt;/td&gt;
-					&lt;td style="text-align: center"&gt;true&lt;/td&gt;
-					&lt;td&gt;Description of the tool that is passed to the LLM.&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
-&lt;/table&gt;</description></item><item><title>looker-run-dashboard</title><link>https://mcp-toolbox.dev/dev/integrations/looker/tools/looker-run-dashboard/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/looker/tools/looker-run-dashboard/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
+ &lt;p&gt;This tool can be used with the following database sources:&lt;/p&gt;</description></item><item><title>looker-run-dashboard</title><link>https://mcp-toolbox.dev/dev/integrations/looker/tools/looker-run-dashboard/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/looker/tools/looker-run-dashboard/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
 &lt;p&gt;The &lt;code&gt;looker-run-dashboard&lt;/code&gt; tool runs the queries associated with a
 dashboard.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;looker-run-dashboard&lt;/code&gt; takes one parameter, the &lt;code&gt;dashboard_id&lt;/code&gt;.&lt;/p&gt;
@@ -8695,7 +8346,7 @@ returned. Otherwise, the selection is not guaranteed.&lt;/p&gt;
 &lt;p&gt;The tool returns a single JSON object representing the document, wrapped in a
 JSON array.&lt;/p&gt;
 &lt;h2 id="compatible-sources"&gt;Compatible Sources&lt;/h2&gt;
-&lt;h2 id="hahahugoshortcode473s0hbhb"&gt;
+&lt;h2 id="hahahugoshortcode128s0hbhb"&gt;
 
 
 
@@ -10194,7 +9845,161 @@ the form of placeholders &lt;code&gt;?&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This tool uses parameterized queries to prevent CQL injections.
 Query parameters can be used as substitutes for arbitrary expressions.
 Parameters cannot be used as substitutes for keyspaces, table names, column
-names, or other parts of the query.&lt;/p&gt;</description></item><item><title>serverless-spark-get-batch</title><link>https://mcp-toolbox.dev/dev/integrations/serverless-spark/tools/serverless-spark-get-batch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/serverless-spark/tools/serverless-spark-get-batch/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
+names, or other parts of the query.&lt;/p&gt;</description></item><item><title>Securing Toolbox with Model Armor</title><link>https://mcp-toolbox.dev/dev/documentation/configuration/security/model-armor/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/documentation/configuration/security/model-armor/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://cloud.google.com/security/products/model-armor"&gt;Google Cloud Model Armor&lt;/a&gt; is
+an LLM-agnostic service that screens prompts and responses to defend AI
+applications against prompt injection, jailbreaks, and sensitive data leakage.
+Pairing it with MCP Toolbox lets you screen both the prompts your users send and
+the responses your agent returns, including any sensitive data pulled from your
+tools, without trusting the model to police itself.&lt;/p&gt;
+&lt;p&gt;Model Armor screens traffic in two directions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Ingress (incoming):&lt;/strong&gt; Every input the model receives is screened before the
+model acts on it — the user&amp;rsquo;s prompt, and any data your tools return as it flows
+back in. This catches prompt injection and jailbreak attempts.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Egress (outgoing):&lt;/strong&gt; Every response the model produces is screened before it
+returns to the user. This catches sensitive data leakage and harmful content.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="mermaid"&gt;sequenceDiagram
+ actor User
+ participant MA as Model Armor
+ participant Agent as Agent / LLM
+ participant Tool
+
+ User-&amp;gt;&amp;gt;MA: prompt
+ Note over MA: Ingress: screen input
+ MA-&amp;gt;&amp;gt;Agent: prompt
+
+ Agent-&amp;gt;&amp;gt;Tool: tool call
+ Tool-&amp;gt;&amp;gt;MA: tool data
+ Note over MA: Ingress: screen input
+ MA-&amp;gt;&amp;gt;Agent: tool data
+
+ Agent-&amp;gt;&amp;gt;MA: response
+ Note over MA: Egress: screen output
+ MA-&amp;gt;&amp;gt;User: response&lt;/pre&gt;
+&lt;style type="text/css"&gt;
+ 
+ .notice {
+ --title-color: #fff;
+ --title-background-color: #6be;
+ --content-color: #444;
+ --content-background-color: #e7f2fa;
+ }
+
+ .notice.info {
+ --title-background-color: #fb7;
+ --content-background-color: #fec;
+ }
+
+ .notice.tip {
+ --title-background-color: #5a5;
+ --content-background-color: #efe;
+ }
+
+ .notice.warning {
+ --title-background-color: #c33;
+ --content-background-color: #fee;
+ }
+
+ 
+ @media (prefers-color-scheme:dark) {
+ .notice {
+ --title-color: #fff;
+ --title-background-color: #069;
+ --content-color: #ddd;
+ --content-background-color: #023;
+ }
+
+ .notice.info {
+ --title-background-color: #a50;
+ --content-background-color: #420;
+ }
+
+ .notice.tip {
+ --title-background-color: #363;
+ --content-background-color: #121;
+ }
+
+ .notice.warning {
+ --title-background-color: #800;
+ --content-background-color: #400;
+ }
+ }
+
+ body.dark .notice {
+ --title-color: #fff;
+ --title-background-color: #069;
+ --content-color: #ddd;
+ --content-background-color: #023;
+ }
+
+ body.dark .notice.info {
+ --title-background-color: #a50;
+ --content-background-color: #420;
+ }
+
+ body.dark .notice.tip {
+ --title-background-color: #363;
+ --content-background-color: #121;
+ }
+
+ body.dark .notice.warning {
+ --title-background-color: #800;
+ --content-background-color: #400;
+ }
+
+ 
+ .notice {
+ padding: 18px;
+ line-height: 24px;
+ margin-bottom: 24px;
+ border-radius: 4px;
+ color: var(--content-color);
+ background: var(--content-background-color);
+ }
+
+ .notice p:last-child {
+ margin-bottom: 0
+ }
+
+ 
+ .notice-title {
+ margin: -18px -18px 12px;
+ padding: 4px 18px;
+ border-radius: 4px 4px 0 0;
+ font-weight: 700;
+ color: var(--title-color);
+ background: var(--title-background-color);
+ }
+
+ 
+ .icon-notice {
+ display: inline-flex;
+ align-self: center;
+ margin-right: 8px;
+ }
+
+ .icon-notice img,
+ .icon-notice svg {
+ height: 1em;
+ width: 1em;
+ fill: currentColor;
+ }
+
+ .icon-notice img,
+ .icon-notice.baseline svg {
+ top: .125em;
+ position: relative;
+ }
+&lt;/style&gt;&lt;div class="notice note" &gt;
+ &lt;p class="notice-title"&gt;
+ &lt;span class="icon-notice baseline"&gt;
+ &lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 128 300 300"&gt;
+ &lt;path d="M150 128c82.813 0 150 67.188 150 150 0 82.813-67.188 150-150 150C67.187 428 0 360.812 0 278c0-82.813 67.188-150 150-150Zm25 243.555v-37.11c0-3.515-2.734-6.445-6.055-6.445h-37.5c-3.515 0-6.445 2.93-6.445 6.445v37.11c0 3.515 2.93 6.445 6.445 6.445h37.5c3.32 0 6.055-2.93 6.055-6.445Zm-.39-67.188 3.515-121.289c0-1.367-.586-2.734-1.953-3.516-1.172-.976-2.93-1.562-4.688-1.562h-42.968c-1.758 0-3.516.586-4.688 1.563-1.367.78-1.953 2.148-1.953 3.515l3.32 121.29c0 2.734 2.93 4.882 6.64 4.882h36.134c3.515 0 6.445-2.148 6.64-4.883Z"/&gt;
+&lt;/svg&gt;
+
+ &lt;/span&gt;Note&lt;/p&gt;</description></item><item><title>serverless-spark-get-batch</title><link>https://mcp-toolbox.dev/dev/integrations/serverless-spark/tools/serverless-spark-get-batch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/serverless-spark/tools/serverless-spark-get-batch/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
 &lt;p&gt;The &lt;code&gt;serverless-spark-get-batch&lt;/code&gt; tool allows you to retrieve a specific
 Serverless Spark batch job.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;serverless-spark-list-batches&lt;/code&gt; accepts the following parameters:&lt;/p&gt;
@@ -15900,55 +15705,12 @@ query execution capabilities.&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;description&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;Start date filter&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;- &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;limit&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;description&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;Maximum number of results&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="reference"&gt;Reference&lt;/h2&gt;
-&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;&lt;strong&gt;field&lt;/strong&gt;&lt;/th&gt;
-					&lt;th style="text-align: center"&gt;&lt;strong&gt;type&lt;/strong&gt;&lt;/th&gt;
-					&lt;th style="text-align: center"&gt;&lt;strong&gt;required&lt;/strong&gt;&lt;/th&gt;
-					&lt;th&gt;&lt;strong&gt;description&lt;/strong&gt;&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;type&lt;/td&gt;
-					&lt;td style="text-align: center"&gt;string&lt;/td&gt;
-					&lt;td style="text-align: center"&gt;true&lt;/td&gt;
-					&lt;td&gt;Must be &amp;ldquo;clickhouse-sql&amp;rdquo;.&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;source&lt;/td&gt;
-					&lt;td style="text-align: center"&gt;string&lt;/td&gt;
-					&lt;td style="text-align: center"&gt;true&lt;/td&gt;
-					&lt;td&gt;Name of the ClickHouse source to execute SQL against.&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;description&lt;/td&gt;
-					&lt;td style="text-align: center"&gt;string&lt;/td&gt;
-					&lt;td style="text-align: center"&gt;true&lt;/td&gt;
-					&lt;td&gt;Description of the tool that is passed to the LLM.&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;statement&lt;/td&gt;
-					&lt;td style="text-align: center"&gt;string&lt;/td&gt;
-					&lt;td style="text-align: center"&gt;true&lt;/td&gt;
-					&lt;td&gt;The SQL statement template to execute.&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;parameters&lt;/td&gt;
-					&lt;td style="text-align: center"&gt;array of Parameter&lt;/td&gt;
-					&lt;td style="text-align: center"&gt;false&lt;/td&gt;
-					&lt;td&gt;Parameters for prepared statement values.&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;templateParameters&lt;/td&gt;
-					&lt;td style="text-align: center"&gt;array of Parameter&lt;/td&gt;
-					&lt;td style="text-align: center"&gt;false&lt;/td&gt;
-					&lt;td&gt;Parameters for SQL statement template customization.&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
-&lt;/table&gt;</description></item><item><title>Cloud SQL for MySQL using MCP</title><link>https://mcp-toolbox.dev/dev/documentation/connect-to/ides/cloud_sql_mysql_mcp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/documentation/connect-to/ides/cloud_sql_mysql_mcp/</guid><description>&lt;html&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="vector-search-example"&gt;Vector Search Example&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;clickhouse-sql&lt;/code&gt; tool can transparently embed string parameters into vectors
+via Toolbox&amp;rsquo;s native &lt;a href="https://mcp-toolbox.dev/dev/documentation/configuration/embedding-models/"&gt;embedding models&lt;/a&gt;.
+The vector is bound to the prepared-statement placeholder as a native
+&lt;code&gt;Array(Float32)&lt;/code&gt;, so you can write SQL against ClickHouse&amp;rsquo;s vector functions
+(e.g. &lt;code&gt;cosineDistance&lt;/code&gt;, &lt;code&gt;L2Distance&lt;/code&gt;) without doing any string parsing yourself.&lt;/p&gt;</description></item><item><title>Cloud SQL for MySQL using MCP</title><link>https://mcp-toolbox.dev/dev/documentation/connect-to/ides/cloud_sql_mysql_mcp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/documentation/connect-to/ides/cloud_sql_mysql_mcp/</guid><description>&lt;html&gt;
  &lt;head&gt;
  &lt;title&gt;Redirecting to Cloud SQL for MySQL using MCP&lt;/title&gt;
  &lt;link rel="canonical" href="https://cloud.google.com/sql/docs/mysql/pre-built-tools-with-mcp-toolbox"/&gt;
@@ -16062,44 +15824,14 @@ instance in a specified Google Cloud project.&lt;/p&gt;
 &lt;h2 id="example"&gt;Example&lt;/h2&gt;
 &lt;p&gt;Here is an example of how to configure the &lt;code&gt;cloud-sql-mysql-create-instance&lt;/code&gt;
 tool in your &lt;code&gt;tools.yaml&lt;/code&gt; file:&lt;/p&gt;</description></item><item><title>cloud-storage-create-bucket</title><link>https://mcp-toolbox.dev/dev/integrations/cloud-storage/tools/cloud-storage-create-bucket/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/cloud-storage/tools/cloud-storage-create-bucket/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
-&lt;p&gt;A &lt;code&gt;cloud-storage-create-bucket&lt;/code&gt; tool creates a new Cloud Storage bucket in the
-project configured on the Cloud Storage source. Use it when an agent needs to
-provision a bucket before writing objects or building a data workflow.&lt;/p&gt;
-&lt;h2 id="compatible-sources"&gt;Compatible Sources&lt;/h2&gt;
-
-
-
-
-
-&lt;div class="compatibility-section"&gt;
- &lt;p&gt;This tool can be used with the following database sources:&lt;/p&gt;
-
- &lt;table&gt;
- &lt;thead&gt;
- &lt;tr&gt;
- &lt;th&gt;Source Name&lt;/th&gt;
- &lt;/tr&gt;
- &lt;/thead&gt;
- &lt;tbody&gt;
- 
- 
- &lt;tr&gt;
- &lt;td&gt;&lt;a href="https://mcp-toolbox.dev/dev/integrations/cloud-storage/source/"&gt;Cloud Storage Source&lt;/a&gt;&lt;/td&gt;
- &lt;/tr&gt;
- 
-
- 
-
- 
- 
- &lt;/tbody&gt;
- &lt;/table&gt;
-&lt;/div&gt;
-
-&lt;h2 id="requirements"&gt;Requirements&lt;/h2&gt;
-&lt;p&gt;The Cloud Storage credentials must be able to create buckets in the configured
-project. Bucket names are globally unique and must satisfy Cloud Storage bucket
-naming rules.&lt;/p&gt;</description></item><item><title>cloud-storage-list-objects</title><link>https://mcp-toolbox.dev/dev/integrations/cloud-storage/tools/cloud-storage-list-objects/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/cloud-storage/tools/cloud-storage-list-objects/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
+&lt;p&gt;A &lt;code&gt;cloud-storage-create-bucket&lt;/code&gt; tool creates a new Cloud Storage bucket. By
+default, it creates the bucket in the project configured on the Cloud Storage
+source. You can pass the optional &lt;code&gt;project&lt;/code&gt; parameter to create buckets in a
+different project that the same credentials can access.&lt;/p&gt;
+&lt;p&gt;You can also set &lt;code&gt;project&lt;/code&gt;, &lt;code&gt;location&lt;/code&gt;, or &lt;code&gt;uniform_bucket_level_access&lt;/code&gt; in the
+tool configuration. When set, that field is removed from the runtime parameter
+schema and the configured value is always used. Set &lt;code&gt;project&lt;/code&gt; to an empty string
+to hide the parameter while using the source&amp;rsquo;s configured project.&lt;/p&gt;</description></item><item><title>cloud-storage-list-objects</title><link>https://mcp-toolbox.dev/dev/integrations/cloud-storage/tools/cloud-storage-list-objects/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/cloud-storage/tools/cloud-storage-list-objects/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
 &lt;p&gt;A &lt;code&gt;cloud-storage-list-objects&lt;/code&gt; tool returns the objects in a
 &lt;a href="https://cloud.google.com/storage/docs/buckets"&gt;Cloud Storage bucket&lt;/a&gt;. It supports the usual GCS listing options:&lt;/p&gt;
 &lt;ul&gt;
@@ -16155,7 +15887,46 @@ returned by the Cloud Storage API — fields such as &lt;code&gt;Name&lt;/code&g
  &lt;path d="M150 128c82.813 0 150 67.188 150 150 0 82.813-67.188 150-150 150C67.187 428 0 360.812 0 278c0-82.813 67.188-150 150-150Zm25 243.555v-37.11c0-3.515-2.734-6.445-6.055-6.445h-37.5c-3.515 0-6.445 2.93-6.445 6.445v37.11c0 3.515 2.93 6.445 6.445 6.445h37.5c3.32 0 6.055-2.93 6.055-6.445Zm-.39-67.188 3.515-121.289c0-1.367-.586-2.734-1.953-3.516-1.172-.976-2.93-1.562-4.688-1.562h-42.968c-1.758 0-3.516.586-4.688 1.563-1.367.78-1.953 2.148-1.953 3.515l3.32 121.29c0 2.734 2.93 4.882 6.64 4.882h36.134c3.515 0 6.445-2.148 6.64-4.883Z"/&gt;
 &lt;/svg&gt;
 
- &lt;/span&gt;Note&lt;/p&gt;</description></item><item><title>elasticsearch-esql</title><link>https://mcp-toolbox.dev/dev/integrations/elasticsearch/tools/elasticsearch-esql/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/elasticsearch/tools/elasticsearch-esql/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
+ &lt;/span&gt;Note&lt;/p&gt;</description></item><item><title>dataplex-create-data-product</title><link>https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/tools/knowledge-catalog-create-data-product/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/tools/knowledge-catalog-create-data-product/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
+&lt;p&gt;A &lt;code&gt;dataplex-create-data-product&lt;/code&gt; tool creates a new Data Product in Knowledge Catalog (formerly known as Dataplex). This is a long-running operation, and the tool returns immediately with the operation&amp;rsquo;s location ID and operation ID.&lt;/p&gt;
+&lt;p&gt;View the &lt;a href="https://docs.cloud.google.com/dataplex/docs/data-products-overview"&gt;Data Products guide&lt;/a&gt; for more information.&lt;/p&gt;
+&lt;h2 id="compatible-sources"&gt;Compatible Sources&lt;/h2&gt;
+
+
+
+
+
+&lt;div class="compatibility-section"&gt;
+ &lt;p&gt;This tool can be used with the following database sources:&lt;/p&gt;
+
+ &lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;Source Name&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ 
+ 
+ &lt;tr&gt;
+ &lt;td&gt;&lt;a href="https://mcp-toolbox.dev/dev/integrations/knowledge-catalog/source/"&gt;Knowledge Catalog (formerly known as Dataplex) Source&lt;/a&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ 
+
+ 
+
+ 
+ 
+ &lt;/tbody&gt;
+ &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;h2 id="requirements"&gt;Requirements&lt;/h2&gt;
+&lt;h3 id="iam-permissions"&gt;IAM Permissions&lt;/h3&gt;
+&lt;p&gt;Knowledge Catalog uses &lt;a href="https://cloud.google.com/dataplex/docs/iam-and-access-control"&gt;Identity and Access Management (IAM)&lt;/a&gt; to control
+user and group access to Knowledge Catalog resources. Toolbox will use your
+&lt;a href="https://cloud.google.com/docs/authentication#adc"&gt;Application Default Credentials (ADC)&lt;/a&gt; to authorize and authenticate when
+interacting with &lt;a href="https://cloud.google.com/dataplex"&gt;Knowledge Catalog&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>elasticsearch-esql</title><link>https://mcp-toolbox.dev/dev/integrations/elasticsearch/tools/elasticsearch-esql/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/elasticsearch/tools/elasticsearch-esql/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
 &lt;p&gt;Execute ES|QL queries.&lt;/p&gt;
 &lt;p&gt;This tool allows you to execute ES|QL queries against your Elasticsearch
 cluster. You can use this to perform complex searches and aggregations.&lt;/p&gt;
@@ -16842,111 +16613,17 @@ project&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>cloud-storage-get-
 Storage bucket. Use it when the LLM needs fields such as location, storage
 class, labels, lifecycle configuration, or uniform bucket-level access status.&lt;/p&gt;
 &lt;p&gt;The response is the bucket metadata structure returned by the Cloud Storage API.&lt;/p&gt;
-&lt;h2 id="compatible-sources"&gt;Compatible Sources&lt;/h2&gt;
-
-
-
-
-
-&lt;div class="compatibility-section"&gt;
- &lt;p&gt;This tool can be used with the following database sources:&lt;/p&gt;
-
- &lt;table&gt;
- &lt;thead&gt;
- &lt;tr&gt;
- &lt;th&gt;Source Name&lt;/th&gt;
- &lt;/tr&gt;
- &lt;/thead&gt;
- &lt;tbody&gt;
- 
- 
- &lt;tr&gt;
- &lt;td&gt;&lt;a href="https://mcp-toolbox.dev/dev/integrations/cloud-storage/source/"&gt;Cloud Storage Source&lt;/a&gt;&lt;/td&gt;
- &lt;/tr&gt;
- 
-
- 
-
- 
- 
- &lt;/tbody&gt;
- &lt;/table&gt;
-&lt;/div&gt;
-
-&lt;h2 id="requirements"&gt;Requirements&lt;/h2&gt;
-&lt;p&gt;The Cloud Storage credentials must be able to read metadata for the target
-bucket.&lt;/p&gt;</description></item><item><title>cloud-storage-get-object-metadata</title><link>https://mcp-toolbox.dev/dev/integrations/cloud-storage/tools/cloud-storage-get-object-metadata/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/cloud-storage/tools/cloud-storage-get-object-metadata/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
+&lt;p&gt;You can set &lt;code&gt;bucket&lt;/code&gt; in the tool configuration. When set, &lt;code&gt;bucket&lt;/code&gt; is removed
+from the runtime parameter schema and the configured bucket is always used. A
+configured &lt;code&gt;bucket&lt;/code&gt; must be a non-empty string.&lt;/p&gt;</description></item><item><title>cloud-storage-get-object-metadata</title><link>https://mcp-toolbox.dev/dev/integrations/cloud-storage/tools/cloud-storage-get-object-metadata/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/cloud-storage/tools/cloud-storage-get-object-metadata/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
 &lt;p&gt;A &lt;code&gt;cloud-storage-get-object-metadata&lt;/code&gt; tool returns metadata for a single
 &lt;a href="https://cloud.google.com/storage/docs/objects"&gt;Cloud Storage object&lt;/a&gt;. Use it when the LLM needs fields such as
 object name, size, content type, generation, storage class, timestamps, checksums,
 or custom metadata without reading the object&amp;rsquo;s content.&lt;/p&gt;
 &lt;p&gt;The response is the object metadata structure returned by the Cloud Storage API.&lt;/p&gt;
-&lt;h2 id="compatible-sources"&gt;Compatible Sources&lt;/h2&gt;
-
-
-
-
-
-&lt;div class="compatibility-section"&gt;
- &lt;p&gt;This tool can be used with the following database sources:&lt;/p&gt;
-
- &lt;table&gt;
- &lt;thead&gt;
- &lt;tr&gt;
- &lt;th&gt;Source Name&lt;/th&gt;
- &lt;/tr&gt;
- &lt;/thead&gt;
- &lt;tbody&gt;
- 
- 
- &lt;tr&gt;
- &lt;td&gt;&lt;a href="https://mcp-toolbox.dev/dev/integrations/cloud-storage/source/"&gt;Cloud Storage Source&lt;/a&gt;&lt;/td&gt;
- &lt;/tr&gt;
- 
-
- 
-
- 
- 
- &lt;/tbody&gt;
- &lt;/table&gt;
-&lt;/div&gt;
-
-&lt;h2 id="parameters"&gt;Parameters&lt;/h2&gt;
-&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;&lt;strong&gt;parameter&lt;/strong&gt;&lt;/th&gt;
-					&lt;th style="text-align: center"&gt;&lt;strong&gt;type&lt;/strong&gt;&lt;/th&gt;
-					&lt;th style="text-align: center"&gt;&lt;strong&gt;required&lt;/strong&gt;&lt;/th&gt;
-					&lt;th&gt;&lt;strong&gt;description&lt;/strong&gt;&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;bucket&lt;/td&gt;
-					&lt;td style="text-align: center"&gt;string&lt;/td&gt;
-					&lt;td style="text-align: center"&gt;true&lt;/td&gt;
-					&lt;td&gt;Name of the Cloud Storage bucket containing the object.&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;object&lt;/td&gt;
-					&lt;td style="text-align: center"&gt;string&lt;/td&gt;
-					&lt;td style="text-align: center"&gt;true&lt;/td&gt;
-					&lt;td&gt;Full object name (path) within the bucket, e.g. &lt;code&gt;path/to/file.txt&lt;/code&gt;.&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id="example"&gt;Example&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;kind&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;tool&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;get_object_metadata&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;cloud-storage-get-object-metadata&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;source&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;my-gcs-source&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;description&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;Use this tool to inspect metadata for a Cloud Storage object.&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="output-format"&gt;Output Format&lt;/h2&gt;
-&lt;p&gt;The tool returns object metadata from the Cloud Storage API, including fields
-such as &lt;code&gt;Name&lt;/code&gt;, &lt;code&gt;Bucket&lt;/code&gt;, &lt;code&gt;Size&lt;/code&gt;, &lt;code&gt;ContentType&lt;/code&gt;, &lt;code&gt;Updated&lt;/code&gt;, &lt;code&gt;StorageClass&lt;/code&gt;,
-&lt;code&gt;MD5&lt;/code&gt;, &lt;code&gt;CRC32C&lt;/code&gt;, and user-defined metadata when present.&lt;/p&gt;</description></item><item><title>elasticsearch-execute-esql</title><link>https://mcp-toolbox.dev/dev/integrations/elasticsearch/tools/elasticsearch-execute-esql/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/elasticsearch/tools/elasticsearch-execute-esql/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
+&lt;p&gt;You can set &lt;code&gt;bucket&lt;/code&gt; in the tool configuration. When set, &lt;code&gt;bucket&lt;/code&gt; is removed
+from the runtime parameter schema and the configured bucket is always used. A
+configured &lt;code&gt;bucket&lt;/code&gt; must be a non-empty string.&lt;/p&gt;</description></item><item><title>elasticsearch-execute-esql</title><link>https://mcp-toolbox.dev/dev/integrations/elasticsearch/tools/elasticsearch-execute-esql/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/elasticsearch/tools/elasticsearch-execute-esql/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
 &lt;p&gt;Execute arbitrary ES|QL statements.&lt;/p&gt;
 &lt;p&gt;This tool allows you to execute arbitrary ES|QL statements against your
 Elasticsearch cluster at runtime. This is useful for ad-hoc queries where the
@@ -17374,6 +17051,9 @@ project&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>cloud-storage-get-
 &lt;p&gt;A &lt;code&gt;cloud-storage-get-bucket-iam-policy&lt;/code&gt; tool returns the IAM policy bindings for
 a Cloud Storage bucket. Use it to inspect which principals have roles on a
 bucket without modifying access.&lt;/p&gt;
+&lt;p&gt;You can set &lt;code&gt;bucket&lt;/code&gt; in the tool configuration. When set, &lt;code&gt;bucket&lt;/code&gt; is removed
+from the runtime parameter schema and the configured bucket is always used. A
+configured &lt;code&gt;bucket&lt;/code&gt; must be a non-empty string.&lt;/p&gt;
 &lt;h2 id="compatible-sources"&gt;Compatible Sources&lt;/h2&gt;
 
 
@@ -17381,60 +17061,7 @@ bucket without modifying access.&lt;/p&gt;
 
 
 &lt;div class="compatibility-section"&gt;
- &lt;p&gt;This tool can be used with the following database sources:&lt;/p&gt;
-
- &lt;table&gt;
- &lt;thead&gt;
- &lt;tr&gt;
- &lt;th&gt;Source Name&lt;/th&gt;
- &lt;/tr&gt;
- &lt;/thead&gt;
- &lt;tbody&gt;
- 
- 
- &lt;tr&gt;
- &lt;td&gt;&lt;a href="https://mcp-toolbox.dev/dev/integrations/cloud-storage/source/"&gt;Cloud Storage Source&lt;/a&gt;&lt;/td&gt;
- &lt;/tr&gt;
- 
-
- 
-
- 
- 
- &lt;/tbody&gt;
- &lt;/table&gt;
-&lt;/div&gt;
-
-&lt;h2 id="requirements"&gt;Requirements&lt;/h2&gt;
-&lt;p&gt;The Cloud Storage credentials must be able to read the IAM policy for the target
-bucket.&lt;/p&gt;
-&lt;h2 id="parameters"&gt;Parameters&lt;/h2&gt;
-&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;&lt;strong&gt;parameter&lt;/strong&gt;&lt;/th&gt;
-					&lt;th style="text-align: center"&gt;&lt;strong&gt;type&lt;/strong&gt;&lt;/th&gt;
-					&lt;th style="text-align: center"&gt;&lt;strong&gt;required&lt;/strong&gt;&lt;/th&gt;
-					&lt;th&gt;&lt;strong&gt;description&lt;/strong&gt;&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;bucket&lt;/td&gt;
-					&lt;td style="text-align: center"&gt;string&lt;/td&gt;
-					&lt;td style="text-align: center"&gt;true&lt;/td&gt;
-					&lt;td&gt;Name of the Cloud Storage bucket whose IAM policy should be returned.&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id="example"&gt;Example&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;kind&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;tool&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;get_bucket_iam_policy&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;cloud-storage-get-bucket-iam-policy&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;source&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;my-gcs-source&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;description&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;Use this tool to inspect IAM bindings for a Cloud Storage bucket.&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="output-format"&gt;Output Format&lt;/h2&gt;
-&lt;p&gt;The tool returns a JSON object with:&lt;/p&gt;</description></item><item><title>cloud-storage-read-object</title><link>https://mcp-toolbox.dev/dev/integrations/cloud-storage/tools/cloud-storage-read-object/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/cloud-storage/tools/cloud-storage-read-object/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
+ &lt;p&gt;This tool can be used with the following database sources:&lt;/p&gt;</description></item><item><title>cloud-storage-read-object</title><link>https://mcp-toolbox.dev/dev/integrations/cloud-storage/tools/cloud-storage-read-object/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/integrations/cloud-storage/tools/cloud-storage-read-object/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
 &lt;p&gt;A &lt;code&gt;cloud-storage-read-object&lt;/code&gt; tool fetches the bytes of a single
 &lt;a href="https://cloud.google.com/storage/docs/objects"&gt;Cloud Storage object&lt;/a&gt; and returns them as plain UTF-8 text.&lt;/p&gt;
 &lt;p&gt;Only text objects are supported today: if the object bytes (or the requested
@@ -17730,15 +17357,10 @@ file on the Toolbox server. Unlike &lt;code&gt;cloud-storage-read-object&lt;/cod
 return the object bytes to the LLM and does not require UTF-8 text content, so it
 can be used for binary objects or large files.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;destination&lt;/code&gt; path is interpreted on the server where Toolbox is running.
-Relative paths and paths containing &lt;code&gt;..&lt;/code&gt; are rejected.&lt;/p&gt;
-&lt;h2 id="compatible-sources"&gt;Compatible Sources&lt;/h2&gt;
-
-
-
-
-
-&lt;div class="compatibility-section"&gt;
- &lt;p&gt;This tool can be used with the following database sources:&lt;/p&gt;</description></item><item><title>Export Telemetry</title><link>https://mcp-toolbox.dev/dev/documentation/monitoring/export_telemetry/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/documentation/monitoring/export_telemetry/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
+By default, &lt;code&gt;destination&lt;/code&gt; must be an absolute path and paths containing &lt;code&gt;..&lt;/code&gt; are
+rejected. When &lt;code&gt;destination_dir&lt;/code&gt; is configured on the tool, &lt;code&gt;destination&lt;/code&gt; remains
+visible to the LLM but must be a relative path under that configured directory.
+Absolute paths and paths that escape &lt;code&gt;destination_dir&lt;/code&gt; are rejected.&lt;/p&gt;</description></item><item><title>Export Telemetry</title><link>https://mcp-toolbox.dev/dev/documentation/monitoring/export_telemetry/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/documentation/monitoring/export_telemetry/</guid><description>&lt;h2 id="about"&gt;About&lt;/h2&gt;
 &lt;p&gt;The &lt;a href="https://opentelemetry.io/docs/collector/"&gt;OpenTelemetry Collector&lt;/a&gt; offers a vendor-agnostic
 implementation of how to receive, process and export telemetry data. It removes
 the need to run, operate, and maintain multiple agents/collectors.&lt;/p&gt;
@@ -18806,14 +18428,8 @@ Storage bucket.&lt;/p&gt;
 			&lt;/tr&gt;
 	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id="example"&gt;Example&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;kind&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;tool&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;delete_object&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;cloud-storage-delete-object&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;source&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;my-gcs-source&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;description&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;Use this tool to delete Cloud Storage objects.&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="output-format"&gt;Output Format&lt;/h2&gt;
-&lt;p&gt;The tool returns a JSON object with:&lt;/p&gt;</description></item><item><title>Invoke Tools via CLI</title><link>https://mcp-toolbox.dev/dev/documentation/configuration/tools/invoke_tool/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/documentation/configuration/tools/invoke_tool/</guid><description>&lt;p&gt;The &lt;code&gt;invoke&lt;/code&gt; command allows you to invoke tools defined in your configuration directly from the CLI. This is useful for:&lt;/p&gt;
+&lt;p&gt;If &lt;code&gt;bucket&lt;/code&gt; is configured on the tool, it is removed from the parameter list and
+the configured bucket is used for every invocation.&lt;/p&gt;</description></item><item><title>Invoke Tools via CLI</title><link>https://mcp-toolbox.dev/dev/documentation/configuration/tools/invoke_tool/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mcp-toolbox.dev/dev/documentation/configuration/tools/invoke_tool/</guid><description>&lt;p&gt;The &lt;code&gt;invoke&lt;/code&gt; command allows you to invoke tools defined in your configuration directly from the CLI. This is useful for:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Ephemeral Invocation:&lt;/strong&gt; Executing a tool without spinning up a full MCP server/client.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Debugging:&lt;/strong&gt; Isolating tool execution logic and testing with various parameter combinations.&lt;/li&gt;
@@ -20149,7 +19765,12 @@ entries.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;lookup_entry&lt;/code&gt;: Retrieves a specific entry from Knowledge Catalog.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;search_aspect_types&lt;/code&gt;: Finds aspect types relevant to the query.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;lookup_context&lt;/code&gt;: Retrieves rich metadata regarding one or more data assets along with their relationships.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;search_dq_scans&lt;/code&gt;: Search for data quality scans in Dataplex.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;search_dq_scans&lt;/code&gt;: Searches for data quality scans in Dataplex.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;list_data_products&lt;/code&gt;: Lists Data Products across all locations.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;get_data_product&lt;/code&gt;: Retrieves a specific Data Product.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;list_data_assets&lt;/code&gt;: Lists Data Assets under a Data Product.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;get_data_asset&lt;/code&gt;: Retrieves specific metadata regarding a Data Asset.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;create_data_product&lt;/code&gt;: Creates a new Data Product.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;generate_data_insights&lt;/code&gt;: Creates a new Dataplex Data Documentation scan template and triggers the run.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;get_data_insights&lt;/code&gt;: Retrieves the final generated data insights for a completed scan.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;generate_data_profile&lt;/code&gt;: Creates a new Dataplex Data Profile scan template and triggers the run.&lt;/li&gt;
@@ -20165,6 +19786,7 @@ entries.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Toolsets:&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;discovery&lt;/code&gt;: Metadata discovery and search toolset (&lt;code&gt;search_entries&lt;/code&gt;, &lt;code&gt;lookup_entry&lt;/code&gt;, &lt;code&gt;search_aspect_types&lt;/code&gt;, &lt;code&gt;lookup_context&lt;/code&gt;, &lt;code&gt;search_dq_scans&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;data-products&lt;/code&gt;: Data Products and Data Assets curation and management toolset (&lt;code&gt;search_entries&lt;/code&gt;, &lt;code&gt;lookup_entry&lt;/code&gt;, &lt;code&gt;search_aspect_types&lt;/code&gt;, &lt;code&gt;lookup_context&lt;/code&gt;, &lt;code&gt;list_data_products&lt;/code&gt;, &lt;code&gt;get_data_product&lt;/code&gt;, &lt;code&gt;list_data_assets&lt;/code&gt;, &lt;code&gt;get_data_asset&lt;/code&gt;, &lt;code&gt;create_data_product&lt;/code&gt;).&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;enrich&lt;/code&gt;: Metadata enrichment pipeline orchestration and execution toolset (&lt;code&gt;search_entries&lt;/code&gt;, &lt;code&gt;lookup_entry&lt;/code&gt;, &lt;code&gt;lookup_context&lt;/code&gt;, &lt;code&gt;generate_data_insights&lt;/code&gt;, &lt;code&gt;get_data_insights&lt;/code&gt;, &lt;code&gt;generate_data_profile&lt;/code&gt;, &lt;code&gt;get_data_profile&lt;/code&gt;, &lt;code&gt;discover_metadata&lt;/code&gt;, &lt;code&gt;get_discovery_results&lt;/code&gt;, &lt;code&gt;check_data_quality&lt;/code&gt;, &lt;code&gt;get_data_quality_results&lt;/code&gt;, &lt;code&gt;get_operation&lt;/code&gt;, &lt;code&gt;get_run_status&lt;/code&gt;).&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
